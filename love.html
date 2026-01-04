@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I Love You</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(-45deg, #7b0000, #b11226, #ff4d6d, #800020);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: cursive;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Typing text */
+h1 {
+    color: gold;
+    font-size: 4.5rem;
+    text-shadow: 0 0 15px gold;
+    z-index: 2;
+}
+
+/* Play button */
+#playBtn {
+    position: absolute;
+    bottom: 50px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    background: gold;
+    color: #8b0000;
+    cursor: pointer;
+    box-shadow: 0 0 20px gold;
+    z-index: 3;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    bottom: -30px;
+    color: rgba(255, 182, 193, 0.8);
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Burst hearts */
+.burst {
+    position: absolute;
+    font-size: 24px;
+    animation: burst 1s ease-out forwards;
+}
+
+@keyframes burst {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+}
+
+audio {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="text"></h1>
+
+<button id="playBtn">💖 Touch my heart 💖</button>
+
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/07/04/audio_710c78b6e2.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Typing effect
+const message = "I love you";
+let index = 0;
+const textEl = document.getElementById("text");
+
+function typeText() {
+    if (index < message.length) {
+        textEl.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(typeText, 200);
+    }
+}
+typeText();
+
+// Floating hearts
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 30) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+}, 300);
+
+// Play music on button click
+document.getElementById("playBtn").addEventListener("click", () => {
+    document.getElementById("music").play();
+    document.getElementById("playBtn").style.display = "none";
+});
+
+// Heart burst on tap
+document.addEventListener("click", (e) => {
+    for (let i = 0; i < 6; i++) {
+        let burst = document.createElement("div");
+        burst.className = "burst";
+        burst.innerHTML = "❤";
+        burst.style.left = e.clientX + Math.random() * 30 - 15 + "px";
+        burst.style.top = e.clientY + Math.random() * 30 - 15 + "px";
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 1000);
+    }
+});
+</script>
+
+</body>
+</html>
