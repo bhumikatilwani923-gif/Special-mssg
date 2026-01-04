@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Us 💕</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(120deg, #fff0f5, #ffe4e1, #fffacd);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: cursive;
+}
+
+/* Poem box */
+.poem {
+    background: rgba(255, 255, 255, 0.75);
+    padding: 40px 50px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 182, 193, 0.7);
+    animation: popIn 2s ease forwards;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Poem text */
+.poem p {
+    font-size: 1.6rem;
+    color: #8b0000;
+    line-height: 1.8;
+    animation: fadeUp 2.5s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Floating bubbles */
+.bubble {
+    position: absolute;
+    bottom: -50px;
+    background: rgba(255, 182, 193, 0.5);
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="poem">
+    <p>
+        Aap mere bille 🐱<br>
+        Mai aapki billi 🐾<br>
+        Khayenge machhi 🐟<br>
+        Rahenge khush 😊<br>
+        Bhugli vugli bush 💕
+    </p>
+</div>
+
+<script>
+// Floating bubbles
+setInterval(() => {
+    let bubble = document.createElement("div");
+    bubble.className = "bubble";
+    let size = Math.random() * 40 + 20;
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+    bubble.style.left = Math.random() * 100 + "vw";
+    bubble.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(bubble);
+    setTimeout(() => bubble.remove(), 12000);
+}, 400);
+</script>
+
+</body>
+</html>
